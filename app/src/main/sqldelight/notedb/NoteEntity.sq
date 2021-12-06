@@ -1,0 +1,23 @@
+CREATE TABLE NoteEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    noteTitle TEXT NOT NULL,
+    noteContent TEXT,
+    createdAt TEXT NOT NULL
+);
+
+
+getAllNotes:
+SELECT * FROM NoteEntity;
+
+getNoteById:
+SELECT *
+FROM NoteEntity
+WHERE id = :id;
+
+insertNote:
+INSERT OR REPLACE INTO NoteEntity
+VALUES(?,?,?,?);
+
+deleteNoteById:
+DELETE FROM NoteEntity
+WHERE id=:id;
