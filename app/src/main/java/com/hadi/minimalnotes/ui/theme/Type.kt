@@ -38,7 +38,7 @@ val typography = Typography(
     ),
     h5 = TextStyle(
         fontFamily = Helvetica,
-        fontWeight = FontWeight.W600,
+        fontWeight = FontWeight.W400,
         fontSize = 24.sp
     ),
     h6 = TextStyle(
@@ -49,7 +49,8 @@ val typography = Typography(
     subtitle1 = TextStyle(
         fontFamily = Helvetica,
         fontWeight = FontWeight.W500,
-        fontSize = 16.sp
+        fontSize = 16.sp,
+        lineHeight = 26.sp
     ),
     subtitle2 = TextStyle(
         fontFamily = Helvetica,
