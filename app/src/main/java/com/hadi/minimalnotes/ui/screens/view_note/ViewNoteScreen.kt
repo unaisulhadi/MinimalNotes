@@ -23,14 +23,10 @@ import com.hadi.minimalnotes.ui.theme.white
 @Composable
 fun ViewNoteScreen(
     navController: NavController,
-    viewModel : ViewNoteViewModel = hiltViewModel()
+    viewModel: ViewNoteViewModel = hiltViewModel()
 ) {
 
-    LaunchedEffect(key1 = false){
-        val noteId = navController.currentBackStackEntry?.arguments?.get("noteId").toString()
-        Log.d("NOTE_ID",noteId)
-    }
-
+    val note = viewModel.note
 
     Column(
         modifier = Modifier
@@ -46,8 +42,9 @@ fun ViewNoteScreen(
 
             ImageButton(
                 icon = Icons.Default.KeyboardArrowLeft
-            )
-
+            ) {
+                navController.navigateUp()
+            }
 
             ImageButton(
                 icon = Icons.Default.Edit
@@ -55,6 +52,18 @@ fun ViewNoteScreen(
 
         }
 
+        note?.let {
+            Text(text = note.noteTitle)
+            Text(text = note.createdAt)
+            Text(text = note.noteContent ?: "")
+        } ?: kotlin.run {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Something went wrong")
+            }
+        }
 
 
     }

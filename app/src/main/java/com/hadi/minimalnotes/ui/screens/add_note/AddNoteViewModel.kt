@@ -23,7 +23,7 @@ class AddNoteViewModel @Inject constructor(private val repository: Repository) :
         private set
 
     fun onSaveNote() {
-        if (noteTitleField.isBlank() || noteContentField.isBlank()) {
+        if (noteTitleField.isBlank()) {
             return
         }
 

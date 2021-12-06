@@ -49,8 +49,10 @@ fun NotesScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        horizontal = 12.dp,
-                        vertical = 12.dp
+                        start = 12.dp,
+                        end = 12.dp,
+                        top = 12.dp,
+                        bottom = 8.dp
                     ),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -62,12 +64,12 @@ fun NotesScreen(
                     style = MaterialTheme.typography.h4
                 )
 
-                ImageButton(
+                /*ImageButton(
                     icon = Icons.Outlined.Search,
                     onClick = {
 
                     }
-                )
+                )*/
             }
             Column(
                 modifier = Modifier

@@ -5,57 +5,42 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.hadi.minimalnotes.R
 import com.hadi.minimalnotes.ui.components.ImageButton
 import com.hadi.minimalnotes.ui.components.NoteTextField
-import com.hadi.minimalnotes.ui.theme.Helvetica
 import com.hadi.minimalnotes.ui.theme.buttonColor
 import com.hadi.minimalnotes.ui.theme.white
 
-@ExperimentalComposeUiApi
 @Composable
 fun AddNoteScreen(
     navController: NavController,
     viewModel: AddNoteViewModel = hiltViewModel()
 ) {
 
-    val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(12.dp)
     ) {
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -77,7 +62,9 @@ fun AddNoteScreen(
                     .clickable(
                         onClick = {
                             viewModel.onSaveNote()
-                            navController.navigateUp()
+                            if (viewModel.noteTitleField.isNotBlank()) {
+                                navController.navigateUp()
+                            }
                         }
                     ),
                 contentAlignment = Alignment.Center
