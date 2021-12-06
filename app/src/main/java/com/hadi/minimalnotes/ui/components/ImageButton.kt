@@ -17,6 +17,7 @@ import com.hadi.minimalnotes.ui.theme.white
 
 @Composable
 fun ImageButton(
+    modifier: Modifier=Modifier,
     color: Color = buttonColor,
     iconColor:Color = white,
     icon: ImageVector,
@@ -26,6 +27,7 @@ fun ImageButton(
 ) {
 
     Box(
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Box(
