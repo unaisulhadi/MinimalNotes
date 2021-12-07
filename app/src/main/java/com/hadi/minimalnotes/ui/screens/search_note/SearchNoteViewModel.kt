@@ -27,15 +27,13 @@ class SearchNoteViewModel @Inject constructor(val repository: Repository) : View
     fun setSearchField(value: String) {
         this.searchText = value
         notes = flowOf(emptyList())
-//        if (value.isBlank()) {
-//            notes = flowOf(emptyList())
-//        } else {
+        if(value.isNotBlank()) {
             searchNote(value)
-//        }
+        }
     }
 
     private fun searchNote(value: String) {
-            notes = repository.searchNote(value)
+        notes = repository.searchNote(value)
     }
 
 }

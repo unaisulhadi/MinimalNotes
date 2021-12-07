@@ -39,5 +39,13 @@ class ViewNoteViewModel @Inject constructor(
         }
     }
 
+    fun deleteNote(){
+        viewModelScope.launch {
+            noteId?.let {
+                repository.deleteNoteById(it)
+            }
+        }
+    }
+
 
 }

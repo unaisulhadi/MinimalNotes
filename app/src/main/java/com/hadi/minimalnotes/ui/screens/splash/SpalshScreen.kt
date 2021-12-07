@@ -34,7 +34,6 @@ fun SplashScreen(
 
     val overshootInterpolator = remember {
         OvershootInterpolator(2f)
-
     }
 
     LaunchedEffect(key1 = true) {

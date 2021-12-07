@@ -1,13 +1,11 @@
 package com.hadi.minimalnotes.ui.screens.notes
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -17,7 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.hadi.minimalnotes.ui.components.ImageButton
@@ -31,7 +34,7 @@ import notedb.NoteEntity
 @Composable
 fun NotesScreen(
     navController: NavController,
-    viewModel:NoteViewModel = hiltViewModel()
+    viewModel: NoteViewModel = hiltViewModel()
 ) {
 
     val notes = viewModel.notes.collectAsState(
@@ -71,36 +74,45 @@ fun NotesScreen(
                     }
                 )
             }
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-            ) {
 
+            if (notes.isNullOrEmpty()) {
 
-                StaggeredVerticalGrid(
-                    maxColumnWidth = 220.dp,
-                    modifier = Modifier.padding(8.dp)
+                EmptyNotes {
+                    navController.navigate(Screen.AddNoteScreen.route)
+                }
+
+            } else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
                 ) {
 
-                    notes.forEachIndexed { index, note ->
-                        val color = getColorIntervals(index,notes.size)
-                        NoteCard(
-                            noteEntity = note,
-                            cardColor = color
-                        ) {
+                    StaggeredVerticalGrid(
+                        maxColumnWidth = 220.dp,
+                        modifier = Modifier.padding(8.dp)
+                    ) {
 
-                            navController.navigate(Screen.ViewNoteScreen.route+"/${note.id}")
+                        notes.forEachIndexed { index, note ->
+                            val color = getColorIntervals(index, notes.size)
+                            NoteCard(
+                                noteEntity = note,
+                                cardColor = color
+                            ) {
 
+                                navController.navigate(Screen.ViewNoteScreen.route + "/${note.id}")
+
+                            }
                         }
                     }
                 }
             }
 
+
         }
         ImageButton(
-            modifier = Modifier.
-                align(Alignment.BottomEnd)
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
                 .padding(12.dp),
             size = 64.dp,
             icon = Icons.Outlined.Add,
@@ -108,5 +120,56 @@ fun NotesScreen(
                 navController.navigate(Screen.AddNoteScreen.route)
             }
         )
+    }
+}
+
+@Composable
+fun EmptyNotes(
+    onClick : () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center)
+                .clickable(
+                    onClick = onClick
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(75.dp)
+                    .alpha(0.5F),
+                painter = painterResource(id = com.hadi.minimalnotes.R.drawable.notes),
+                contentDescription = "Logo",
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = "Hmm...Looks like it's empty here!!",
+                textAlign = TextAlign.Center,
+                style = TextStyle(
+                    color = white.copy(0.4F),
+                    fontFamily = Helvetica,
+                    fontSize = 16.sp
+                )
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = "ADD NOTES",
+                textAlign = TextAlign.Center,
+                style = TextStyle(
+                    color = white.copy(0.4F),
+                    fontFamily = Helvetica,
+                    fontSize = 20.sp
+                )
+            )
+        }
+
     }
 }

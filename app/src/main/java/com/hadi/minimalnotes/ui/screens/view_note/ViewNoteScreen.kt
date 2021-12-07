@@ -9,6 +9,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
@@ -52,11 +53,22 @@ fun ViewNoteScreen(
                 navController.navigateUp()
             }
 
-            ImageButton(
-                icon = Icons.Default.Edit
-            ){
-                navController.navigate(Screen.EditNoteScreen.route+"/${note?.id}")
+            Row {
+
+                ImageButton(
+                    icon = Icons.Default.Delete
+                ) {
+                    viewModel.deleteNote()
+                    navController.navigateUp()
+                }
+                Spacer(modifier = Modifier.width(10.dp))
+                ImageButton(
+                    icon = Icons.Default.Edit
+                ) {
+                    navController.navigate(Screen.EditNoteScreen.route + "/${note?.id}")
+                }
             }
+
 
         }
 
