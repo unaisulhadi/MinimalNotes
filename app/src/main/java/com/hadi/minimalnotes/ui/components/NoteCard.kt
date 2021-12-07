@@ -42,7 +42,7 @@ fun NoteCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(14.dp)
         ) {
 
             Text(
@@ -52,12 +52,12 @@ fun NoteCard(
                 maxLines = 6,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = noteEntity.createdAt,
                 style = MaterialTheme.typography.subtitle1,
-                color = black.copy(alpha = 0.3f),
-                fontSize = 12.sp
+                color = black.copy(alpha = 0.4f),
+                fontSize = 14.sp
             )
         }
 

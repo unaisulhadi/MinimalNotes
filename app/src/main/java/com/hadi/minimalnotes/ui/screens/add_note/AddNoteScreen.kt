@@ -16,6 +16,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.hadi.minimalnotes.ui.components.ImageButton
@@ -86,10 +87,10 @@ fun AddNoteScreen(
             value = viewModel.noteTitleField,
             onValueChange = viewModel::onTitleChange,
             imeAction = ImeAction.Next,
+            fontSize = 28.sp,
             placeHolderTitle = "Note Title",
             onNextClick = { focusManager.moveFocus(FocusDirection.Down) }
         )
-        Spacer(modifier = Modifier.height(4.dp))
         NoteTextField(
             modifier = Modifier
                 .fillMaxSize(),

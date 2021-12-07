@@ -78,19 +78,21 @@ fun ViewNoteScreen(
                 text = note.noteTitle,
                 style = MaterialTheme.typography.h5,
                 fontWeight = FontWeight.W500,
-                color = white
+                color = white,
+                fontSize = 28.sp,
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = note.createdAt,
                 style = MaterialTheme.typography.body2,
                 color = white.copy(0.5F)
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
                 text = note.noteContent ?: "",
                 style = MaterialTheme.typography.subtitle1,
+                fontWeight = FontWeight.W500,
                 fontSize = 18.sp,
                 color = white,
             )

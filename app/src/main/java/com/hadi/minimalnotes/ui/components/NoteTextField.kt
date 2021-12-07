@@ -15,31 +15,36 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.hadi.minimalnotes.ui.theme.Helvetica
 
 @Composable
 fun NoteTextField(
     modifier: Modifier = Modifier,
-    value:String,
-    onValueChange : (String) -> Unit,
-    placeHolderTitle:String,
+    value: String,
+    fontSize: TextUnit = 20.sp,
+    onValueChange: (String) -> Unit,
+    placeHolderTitle: String,
     imeAction: ImeAction = ImeAction.Next,
-    onNextClick : () -> Unit = {},
-    onDoneClick : () -> Unit = {}
-){
+    onNextClick: () -> Unit = {},
+    onDoneClick: () -> Unit = {}
+) {
     TextField(
         modifier = modifier,
         value = value,
         onValueChange = onValueChange,
         placeholder = {
-            Text(text = placeHolderTitle)
+            Text(
+                text = placeHolderTitle,
+                fontSize = fontSize
+            )
         },
         textStyle = TextStyle(
             color = Color.White,
             fontFamily = Helvetica,
             fontWeight = FontWeight.Medium,
-            fontSize = 20.sp
+            fontSize = fontSize
         ),
         colors = TextFieldDefaults.textFieldColors(
             textColor = Color.White,
