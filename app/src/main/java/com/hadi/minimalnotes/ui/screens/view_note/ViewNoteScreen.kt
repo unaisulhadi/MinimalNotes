@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.hadi.minimalnotes.ui.components.ImageButton
+import com.hadi.minimalnotes.ui.navigation.Screen
 import com.hadi.minimalnotes.ui.theme.buttonColor
 import com.hadi.minimalnotes.ui.theme.white
 
@@ -30,6 +31,7 @@ fun ViewNoteScreen(
     viewModel: ViewNoteViewModel = hiltViewModel()
 ) {
 
+    viewModel.getNoteById()
     val note = viewModel.note
 
     Column(
@@ -52,7 +54,9 @@ fun ViewNoteScreen(
 
             ImageButton(
                 icon = Icons.Default.Edit
-            )
+            ){
+                navController.navigate(Screen.EditNoteScreen.route+"/${note?.id}")
+            }
 
         }
 
