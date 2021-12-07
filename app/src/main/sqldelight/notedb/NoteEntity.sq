@@ -21,3 +21,6 @@ VALUES(?,?,?,?);
 deleteNoteById:
 DELETE FROM NoteEntity
 WHERE id=:id;
+
+searchNotes:
+SELECT * FROM NoteEntity WHERE noteTitle LIKE '%' || ? || '%';

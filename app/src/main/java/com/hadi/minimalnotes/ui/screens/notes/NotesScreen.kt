@@ -64,12 +64,12 @@ fun NotesScreen(
                     style = MaterialTheme.typography.h4
                 )
 
-                /*ImageButton(
+                ImageButton(
                     icon = Icons.Outlined.Search,
                     onClick = {
-
+                        navController.navigate(Screen.SearchNoteScreen.route)
                     }
-                )*/
+                )
             }
             Column(
                 modifier = Modifier

@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.hadi.minimalnotes.ui.screens.add_note.AddNoteScreen
 import com.hadi.minimalnotes.ui.screens.edit_note.EditNoteScreen
 import com.hadi.minimalnotes.ui.screens.notes.NotesScreen
+import com.hadi.minimalnotes.ui.screens.search_note.SearchNoteScreen
 import com.hadi.minimalnotes.ui.screens.splash.SplashScreen
 import com.hadi.minimalnotes.ui.screens.view_note.ViewNoteScreen
 
@@ -29,6 +30,9 @@ fun Navigation(
 
         composable(route = Screen.AddNoteScreen.route){
             AddNoteScreen(navController = navController)
+        }
+        composable(route = Screen.SearchNoteScreen.route){
+            SearchNoteScreen(navController = navController)
         }
 
         composable(route = Screen.ViewNoteScreen.route  + "/{noteId}"){

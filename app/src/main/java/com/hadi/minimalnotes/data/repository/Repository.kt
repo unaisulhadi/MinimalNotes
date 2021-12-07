@@ -4,6 +4,7 @@ import com.hadi.minimalnotes.NoteDatabase
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import notedb.NoteEntity
 import javax.inject.Inject
@@ -20,7 +21,7 @@ class Repository @Inject constructor(private val db: NoteDatabase) {
         }
     }
 
-    suspend fun insertNote(title: String, content: String, date: String,id: Long? = null) {
+    suspend fun insertNote(title: String, content: String, date: String, id: Long? = null) {
         withContext(Dispatchers.IO) {
             queries.insertNote(id, title, content, date)
         }
@@ -30,6 +31,11 @@ class Repository @Inject constructor(private val db: NoteDatabase) {
         withContext(Dispatchers.IO) {
             queries.deleteNoteById(id)
         }
+    }
+
+    fun searchNote(keyword: String): Flow<List<NoteEntity>> {
+        return queries.searchNotes(keyword).asFlow().mapToList()
+
     }
 
 }
